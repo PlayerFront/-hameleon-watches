@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <h1 id="clock">00:00:00</h1>
+    <p id="color"></p>
+    <button class="button" type="button" name="button" onclick="start()">Click me</button>
+    <script>
+        let clock = document.getElementById('clock');
+        let isTimeShowed = false;
+        function timer() {
+            time = new Date();
+            let h = time.getHours().toString();
+            let m = time.getMinutes().toString();
+            let s = time.getSeconds().toString();
+            if (h.length < 2) {
+                h = '0' + h;
+            }
+            if (m.length < 2) {
+                m = '0' + m;
+            }
+            if (s.length < 2) {
+                s = '0' + s;
+            }
+            clock.innerHTML = `${h} : ${m} : ${s}`;
+            document.body.style.background = '#' + h + m + s;
+        }
+
+        function start() {
+            isTimeShowed = !isTimeShowed;
+            timer();
+            isTimeShowed ? enableTimer() : disableTimer();
+        }
+
+        let interval;
+        function disableTimer() {
+            clearInterval(interval);
+            clock.innerHTML = '00:00:00';
+            document.body.style.background = 'white';
+            document.body.style.color = 'black';
+        }
+        function enableTimer() {
+            interval = setInterval(timer, 1000);
+        }
+    </script>
+</body>
+
+</html>
